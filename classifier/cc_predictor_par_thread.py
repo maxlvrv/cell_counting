@@ -100,10 +100,10 @@ if __name__ == '__main__':
     model_json_path = 'old_models/cc_json_2018_11_20.json'
 
     # Directory path to the files containing the cell coordinates
-    count_path = 'TestSection/counts'
+    count_path = '../TestSection/counts'
 
     # Directory path to the TIFF files containing the cells
-    image_path = 'TestSection'
+    image_path = '../TestSection'
 
     #=============================================================================================
     # Loop through the coordinate files and predict cells
