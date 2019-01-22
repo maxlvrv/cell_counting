@@ -81,7 +81,7 @@ if __name__ == '__main__':
     downsize = 1. #.5 #1.
 
     # Fill in the following details to choose the analysis parameters
-    mask = True
+    mask = False
     over_sample = True
     xy_res = 10
     z_res = 5
@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     # Directory of files to count
     #count_path = raw_input('Image path (drag-and-drop): ').rstrip()
-    count_path = '/mnt/TissueCyte80TB/181012_Gerald_KO/ko-Mosaic/Ch2_Stitched_Sections'
+    count_path = '../TestSection'
     # Number of files [None,None] for all, or [start,end] for specific range
     number_files = [None,None]
 
