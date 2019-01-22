@@ -112,7 +112,7 @@ if __name__ == '__main__':
 
     # Of the images in the above directory, how many will be counted?
     # Number of files [None,None] for all, or [start,end] for specific range
-    number_files = [None,None]
+    number_files = [1,1]
 
     # Do you want to use the custom donut median filter?
     use_medfilt = False
@@ -232,6 +232,10 @@ if __name__ == '__main__':
                     image = image[idx]
                     #Image.fromarray(np.uint8(image)*255).save('/home/gm515/Documents/Temp4/Z_'+str(slice_number)+'.tif')
 
+
+                    row_idx = idx[0].flatten()
+                    col_idx = idx[1].flatten()
+
                 # Perform gaussian donut median filter
                 if use_medfilt:
                     image = gaussmedfilt(image, 3, 1.5)
@@ -259,12 +263,11 @@ if __name__ == '__main__':
                     labels = [region.label for region in regionprops(image_label)]
                     centroids = [region.centroid for region in regionprops(image_label)]
 
-                    # Convert coordinate of centroid to coordinate of whole image if mask was used
-                    if mask:
-                        coordfunc = lambda celly, cellx : (row_idx[celly], col_idx[cellx])
+                    # Convert coordinate of centroid to coordinate of whole image
+                    coordfunc = lambda celly, cellx : (row_idx[celly], col_idx[cellx])
 
-                        # (row, col) or (y, x)
-                        centroids = [coordfunc(int(c[0]), int(c[1])) for c in centroids]
+                    # (row, col) or (y, x)
+                    centroids = [coordfunc(int(c[0]), int(c[1])) for c in centroids]
 
                     #image = np.full(image.shape, False)
 
