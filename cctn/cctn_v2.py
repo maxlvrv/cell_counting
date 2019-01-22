@@ -86,7 +86,7 @@ if __name__ == '__main__':
     ################################################################################
 
     # Do you want to use a mask taken from a registered segmentation atlas
-    mask = True
+    mask = False
 
     # Do you want to perform over sampling correction?
     # Cells within a radius on successive images will be counted as one cell
@@ -108,7 +108,7 @@ if __name__ == '__main__':
     radius = 12.
 
     # Input the directory path of the TIFF images for counting
-    count_path = '/mnt/TissueCyte80TB/181012_Gerald_KO/ko-Mosaic/Ch2_Stitched_Sections'
+    count_path = '../TestSection'
 
     # Of the images in the above directory, how many will be counted?
     # Number of files [None,None] for all, or [start,end] for specific range

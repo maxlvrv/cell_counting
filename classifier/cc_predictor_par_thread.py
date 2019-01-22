@@ -96,14 +96,14 @@ if __name__ == '__main__':
     #=============================================================================================
 
     # CNN model paths
-    model_weights_path = '/Users/gm515/Documents/GitHub/Cell_Counting/classifier/old_models/cc_weights_2018_11_20.h5'
-    model_json_path = '/Users/gm515/Documents/GitHub/Cell_Counting/classifier/old_models/cc_json_2018_11_20.json'
+    model_weights_path = 'old_models/cc_weights_2018_11_20.h5'
+    model_json_path = 'old_models/cc_json_2018_11_20.json'
 
     # Directory path to the files containing the cell coordinates
-    count_path = '/Volumes/TissueCyte/181012_Gerald_KO/ko-Mosaic/Ch2_Stitched_Sections/counts'
+    count_path = 'TestSection/counts'
 
     # Directory path to the TIFF files containing the cells
-    image_path = '/Volumes/TissueCyte/181012_Gerald_KO/ko-Mosaic/Ch2_Stitched_Sections'
+    image_path = 'TestSection'
 
     #=============================================================================================
     # Loop through the coordinate files and predict cells
