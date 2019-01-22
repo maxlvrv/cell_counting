@@ -23,7 +23,7 @@
 ## Module import
 ################################################################################
 
-import os, time, numpy, math, json, warnings, csv, sys, collections, cv2
+import os, time, numpy, math, json, warnings, csv, sys, collections, #cv2
 import numpy as np
 import nibabel as nib
 import matplotlib.pyplot as plt
