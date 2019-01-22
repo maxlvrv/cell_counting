@@ -112,7 +112,7 @@ if __name__ == '__main__':
 
     # Of the images in the above directory, how many will be counted?
     # Number of files [None,None] for all, or [start,end] for specific range
-    number_files = [None,None]
+    number_files = [1,1]
 
     # Do you want to use the custom donut median filter?
     use_medfilt = False
