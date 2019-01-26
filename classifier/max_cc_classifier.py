@@ -1,6 +1,6 @@
 #============================================================================================
 # Classifier Training
-# Author: Gerald M
+# Author: Gerald M (Change by Maksim L)
 #
 # This script uses a convolution neural network classifier, to train for cells and non-cell
 # objects.
@@ -109,6 +109,8 @@ classifier.add(Dense(units = 1, activation = 'sigmoid')) #softmax
 optimizer = RMSprop(lr=1e-4)
 classifier.compile(optimizer = optimizer, loss = 'binary_crossentropy', metrics = ['accuracy'])
 
+model.summary()
+
 print "Done!\n"
 
 #=============================================================================================
@@ -141,11 +143,12 @@ test_data = test_datagen.flow_from_directory('8-bit/test_data', target_size = (8
 
 print "Done!\n"
 
+
 #=============================================================================================
-# Fitting data to model (model to data)
+# Fitting model to data
 #=============================================================================================
 
-print "Fitting data to model..."
+print "Fitting model to data..."
 
 # Find number of epoch and validation steps
 steps_epoch = len([filename for filename in os.listdir('8-bit/training_data/cell') if filename.endswith(".tif")]) + len([filename for filename in os.listdir('8-bit/training_data/nocell') if filename.endswith(".tif")])
@@ -157,31 +160,28 @@ checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_o
 callbacks_list = [checkpoint]
 
 # steps_per_epoch is number of images in training set
-classifier.fit_generator(training_data, steps_per_epoch = steps_epoch, epochs = 8, callbacks=callbacks_list, validation_data = test_data, validation_steps = steps_valid, shuffle = True)
+history = classifier.fit_generator(training_data, steps_per_epoch = steps_epoch, epochs = 5, callbacks=callbacks_list, validation_data = validation_data, validation_steps = steps_valid, shuffle = True)
 
 print "Done!\n"
 
 #=============================================================================================
-# Recompiling training and test data together
+# Plotting accuracy
 #=============================================================================================
 
-for f in os.listdir('8-bit/test_data/cell/'):
-    shutil.move('8-bit/test_data/cell/'+f,'8-bit/training_data/cell/'+f)
+import matplotlib.pyplot as plt
 
-for f in os.listdir('8-bit/test_data/nocell/'):
-    shutil.move('8-bit/test_data/nocell/'+f,'8-bit/training_data/nocell/'+f)
-
-#=============================================================================================
-# Splitting final model into
-#=============================================================================================
-
-model = load_model(filepath)
-# Serialize model to JSON
-model_json = model.to_json()
-with open(filepath[:-3]+".json", "w") as json_file:
-    json_file.write(model_json)
-# Serialize weights to HDF5
-model.save_weights(filepath)
-
-
-print "Done!\n"
+acc = history.history['acc']
+val_acc = history.history['val_acc']
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+epochs = range(1, len(acc) + 1)
+plt.plot(epochs, acc, 'bo', label='Training acc')
+plt.plot(epochs, val_acc, 'b', label='Validation acc')
+plt.title('Training and validation accuracy')
+plt.legend()
+plt.figure()
+plt.plot(epochs, loss, 'bo', label='Training loss')
+plt.plot(epochs, val_loss, 'b', label='Validation loss')
+plt.title('Training and validation loss')
+plt.legend()
+savefig('Loss_and_acc.png')
