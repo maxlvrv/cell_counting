@@ -160,7 +160,7 @@ checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_o
 callbacks_list = [checkpoint]
 
 # steps_per_epoch is number of images in training set
-history = classifier.fit_generator(training_data, steps_per_epoch = steps_epoch, epochs = 5, callbacks=callbacks_list, validation_data = validation_data, validation_steps = steps_valid, shuffle = True)
+history = classifier.fit_generator(training_data, steps_per_epoch = steps_epoch, epochs = 1, callbacks=callbacks_list, validation_data = validation_data, validation_steps = steps_valid, shuffle = True)
 
 print "Done!\n"
 
@@ -179,9 +179,10 @@ plt.plot(epochs, acc, 'bo', label='Training acc')
 plt.plot(epochs, val_acc, 'b', label='Validation acc')
 plt.title('Training and validation accuracy')
 plt.legend()
+savefig('Loss.png')
 plt.figure()
 plt.plot(epochs, loss, 'bo', label='Training loss')
 plt.plot(epochs, val_loss, 'b', label='Validation loss')
 plt.title('Training and validation loss')
 plt.legend()
-savefig('Loss_and_acc.png')
+savefig('Acc.png')
