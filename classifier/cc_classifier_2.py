@@ -157,7 +157,7 @@ checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_o
 callbacks_list = [checkpoint]
 
 # steps_per_epoch is number of images in training set
-classifier.fit_generator(training_data, steps_per_epoch = steps_epoch, epochs = 50, callbacks=callbacks_list, validation_data = test_data, validation_steps = steps_valid, shuffle = True)
+classifier.fit_generator(training_data, steps_per_epoch = steps_epoch, epochs = 4, callbacks=callbacks_list, validation_data = test_data, validation_steps = steps_valid, shuffle = True)
 
 print "Done!\n"
 
