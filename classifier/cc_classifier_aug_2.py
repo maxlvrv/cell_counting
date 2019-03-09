@@ -170,10 +170,11 @@ if not os.path.exists('models/'+strdate):
 
 filepath = "models/"+strdate+"/cc_model_"+strdate+".h5"
 checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
-callbacks_list = [checkpoint]
+earlystop = EarlyStopping(monitor='acc', patience=1,)
+callbacks_list = [checkpoint, earlystop]
 
 # steps_per_epoch is number of images in training set
-model.fit_generator(training_data, steps_per_epoch = steps_epoch, epochs = 25, callbacks=callbacks_list, validation_data = test_data, validation_steps = steps_valid, shuffle = True)
+history = model.fit_generator(training_data, steps_per_epoch = steps_epoch, epochs = 25, callbacks=callbacks_list, validation_data = test_data, validation_steps = steps_valid, shuffle = True)
 
 print "Done!"
 
@@ -208,3 +209,5 @@ with open('models/'+strdate+'/'+strdate+'_model_summary.txt','w') as fh:
     model.summary(print_fn=lambda x: fh.write(x + '\n'))
 
 print "Done!"
+
+
