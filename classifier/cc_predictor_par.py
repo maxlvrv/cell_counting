@@ -94,11 +94,11 @@ if __name__ == '__main__':
     #=============================================================================================
 
     # CNN model paths
-    model_weights_path = 'models/2019_01_29/cc_model_2019_01_29.h5'
-    model_json_path = 'models/2019_01_29/cc_model_2019_01_29.json'
+    model_weights_path = 'models/2019_03_10/cc_model_2019_03_10.h5'
+    model_json_path = 'models/2019_03_10/cc_model_2019_03_10.json'
 
     # Directory path to the files containing the cell coordinates
-    count_path = '/mnt/TissueCyte80TB/181024_Gerald_HET/het-Mosaic/Ch2_Stitched_Sections/counts'
+    count_path = '/mnt/TissueCyte80TB/181024_Gerald_HET/het-Mosaic/Ch2_Stitched_Sections/counts_v5_Balint'
 
     # Directory path to the TIFF files containing the cells
     image_path = '/mnt/TissueCyte80TB/181024_Gerald_HET/het-Mosaic/Ch2_Stitched_Sections'
@@ -161,7 +161,7 @@ if __name__ == '__main__':
         df = df.append({'ROI':marker_filename.split('/')[-1][:-9], 'Original': result[:].count(1)+result[:].count(0), 'True': result[:].count(1), 'False': result[:].count(0)}, ignore_index=True)
 
         # Write dataframe to csv
-        df.to_csv(count_path[:-7]+'/counts_cc_corrected.csv', index=False)
+        df.to_csv(count_path+'/counts_cc_corrected.csv', index=False)
 
 print df
 print '{0:.0f}:{1:.0f} (MM:SS)'.format(*divmod(time.time()-tstart,60))
